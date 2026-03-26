@@ -34,19 +34,18 @@ const HeroSection = () => {
         </motion.p>
 
         <div className="mt-10 flex gap-3">
-          <Link to="/adminpanel">
+          <Link to="/admin/dashboard">
             <button className="px-12 py-3 text-sm bg-red-700 hover:bg-red-600 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105">
               ADMIN
             </button>
           </Link>
 
-          <button
-            onClick={() => setShowModal(true)}
-            className="flex items-center gap-3 px-6 py-3 text-sm  text-red-700 font-semibold rounded-md hover:bg-red-700 hover:text-white transition"
-          >
-            <FaPlay size={18} />
-            Watch  Video
-          </button>
+           <Link to="/trans/dashboard">
+            <button className="px-12 py-3 text-sm bg-red-700 hover:bg-red-600 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105">
+              Transport
+            </button>
+          </Link>
+
         </div>
       </div>
 

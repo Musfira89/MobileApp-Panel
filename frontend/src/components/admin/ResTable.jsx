@@ -1,24 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { fetchAllReservations } from '../../utils/reservationFetcher';
+import React, { useEffect, useState } from "react";
 
 const RecentReservations = () => {
   const [reservations, setReservations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const load = async () => {
       try {
-        const data = await fetchAllReservations();
-        const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setLoading(true);
+
+        const res = await fetch("http://localhost:5000/api/reservations");
+        const json = await res.json();
+
+        if (!json.success) {
+          throw new Error("API Error");
+        }
+
+        const sorted = json.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
         setReservations(sorted);
       } catch (err) {
         console.error("Error loading reservations:", err);
+        setError("Failed to load reservations");
+      } finally {
+        setLoading(false);
       }
     };
+
     load();
   }, []);
 
   const formatDate = (dateStr) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    if (!dateStr) return "-";
+    const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateStr).toLocaleDateString(undefined, options);
   };
 

@@ -61,7 +61,7 @@ const Navbar = () => {
           </nav>
 
           {/* Right - Admin/Rest Buttons */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* <div className="hidden md:flex items-center space-x-2">
             <Link
               to="/adminlogin"
               className="bg-red-700 px-4 py-2 rounded-md text-sm font-semibold hover:bg-red-800 flex items-center gap-1"
@@ -74,7 +74,7 @@ const Navbar = () => {
             >
               <FaUtensils /> RESTAURANT
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Icon */}
           <button
@@ -149,7 +149,7 @@ const Navbar = () => {
               <hr className="border-gray-700" />
 
               {/* Action Buttons in Same Row */}
-              <div className="flex flex-wrap gap-3 mt-4 justify-center">
+              {/* <div className="flex flex-wrap gap-3 mt-4 justify-center">
                 <Link
                   to="/restsignup"
                   className="flex items-center gap-2 bg-red-600 px-4 py-2 rounded-md text-white font-semibold hover:bg-red-700 transition"
@@ -164,7 +164,7 @@ const Navbar = () => {
                 >
                   <FaUserShield /> ADMIN
                 </Link>
-              </div>
+              </div> */}
             </nav>
           </motion.div>
         )}

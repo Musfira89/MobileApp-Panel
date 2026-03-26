@@ -77,7 +77,7 @@ function App() {
 
         {/* Admin Dashboard with Layout */}
         <Route
-          path="/rest/dashboard"
+          path="/trans/dashboard"
           element={
             <RestLayout>
               <RestDashboard />
