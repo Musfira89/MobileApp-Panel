@@ -1,23 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home";
-import AdminLogin from "./pages/admin/login";
 import AdminLayout from "./layouts/AdminLayout";
+import AdminLogin from "./pages/admin/login";
 
 // Admin Pages
 import Dashboard from "./pages/admin/dashboard";
+import Earnings from "./pages/admin/earnings";
 import Reservations from "./pages/admin/reservations";
 import Restaurants from "./pages/admin/restaurants";
 import Users from "./pages/admin/users";
-import Earnings from "./pages/admin/earnings";
 
 // Rest
-import RestDashboard from "./pages/restaurant/dashboard";
-import RestSignup from "./pages/restaurant/signup";
 import RestLogin from "./pages/restaurant/login";
-import RestLayout from "./layouts/RestLayout";
+import RestSignup from "./pages/restaurant/signup";
+import DashboardTransport from "./pages/transportDashboard/DashboardTransport";
 
 function App() {
   return (
@@ -79,9 +77,9 @@ function App() {
         <Route
           path="/trans/dashboard"
           element={
-            <RestLayout>
-              <RestDashboard />
-            </RestLayout>
+          
+              <DashboardTransport />
+            
           }
         />
       </Routes>
