@@ -26,3 +26,4 @@ Thumbs.db
 
 # Firebase specific (if you have local firebase tools)
 .firebase/
+.firebase-admin-key.json
