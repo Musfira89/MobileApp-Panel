@@ -1,8 +1,8 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import AdminEarningsChart from "../../components/admin/AdminEarningsChart";
 import DashboardCards from "../../components/admin/DashboardCards";
 import RecentReservations from "../../components/admin/ResTable";
 import UserGrowthChart from "../../components/admin/UserGrowthChart";
-import AdminEarningsChart from "../../components/admin/AdminEarningsChart";
 
 const Dashboard = () => {
   // Dummy stats (to be fetched later)
@@ -17,6 +17,14 @@ const Dashboard = () => {
     <div className="px-2 sm:px-4 md:px-2 lg:px-2 py-6">
       {/* Page Title */}
       <h1 className="text-2xl font-bold mb-8">Admin Dashboard</h1>
+
+      <div className="fixed top-10 right-15 z-50">
+        <Link to="/trans/dashboard">
+          <button className="px-12 py-3 text-sm bg-red-700 hover:bg-red-600 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105">
+            Transport
+          </button>
+        </Link>
+      </div>
 
       {/* Metric Cards */}
       <div className="my-10">

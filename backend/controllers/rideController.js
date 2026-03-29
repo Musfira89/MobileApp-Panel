@@ -1,7 +1,4 @@
-import { getFirestore } from "firebase-admin/firestore";
-import { auth } from "../firebaseConnect.js"; // Import Firebase Admin Auth
-
-const db = getFirestore();
+import { auth, db } from "../firebaseConnect.js"; // Import Firestore database instance
 
 export const confirmRide = async (req, res) => {
   const { authorization } = req.headers; // Extract the Authorization header

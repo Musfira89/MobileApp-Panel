@@ -1,5 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { db } from "../../../firebase";
 
 const Vehicles = () => {
@@ -19,11 +20,32 @@ const Vehicles = () => {
     const [editingCar, setEditingCar] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
-            setCars(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-            setLoading(false);
-        });
-        return () => unsubscribe();
+        if (!db) return;
+
+        let unsubscribe;
+
+        try {
+            unsubscribe = onSnapshot(
+                collection(db, "cars"),
+                (snapshot) => {
+                    const data = snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }));
+                    setCars(data);
+                    setLoading(false);
+                },
+                (error) => {
+                    console.error("Firestore listener error:", error);
+                }
+            );
+        } catch (err) {
+            console.error("Snapshot setup failed:", err);
+        }
+
+        return () => {
+            if (unsubscribe) unsubscribe();
+        };
     }, []);
 
     const addCar = async () => {
@@ -58,7 +80,7 @@ const Vehicles = () => {
         setYear(car.year);
         setPrice(car.price);
         setNumberPlate(car.numberPlate);
-        setDriverName(car.driver.name);
+        setDriverName(car.driver?.name || "");
         setDriverContact(car.driver.contact);
         setDriverLicense(car.driver.license);
     };
@@ -117,6 +139,13 @@ const Vehicles = () => {
 
                 {/* Header */}
                 <h1 className="text-3xl font-bold text-red-700 mb-6">Vehicle Management</h1>
+                <div className="fixed top-10 right-15 z-50">
+                    <Link to="/admin/dashboard">
+                        <button className="px-12 py-3 text-sm bg-red-700 hover:bg-red-600 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105">
+                            ADMIN
+                        </button>
+                    </Link>
+                </div>
 
                 {/* Form Card */}
                 <div className="bg-white rounded-2xl shadow-md p-6 mb-8 border border-gray-100">
@@ -195,9 +224,8 @@ const Vehicles = () => {
                                         <td className="p-3 text-center">
                                             <button
                                                 onClick={() => toggleStatus(car.id, car.status)}
-                                                className={`px-3 py-1 rounded-full text-xs text-white ${
-                                                    car.status === "Available" ? "bg-green-500" : "bg-gray-500"
-                                                }`}
+                                                className={`px-3 py-1 rounded-full text-xs text-white ${car.status === "Available" ? "bg-green-500" : "bg-gray-500"
+                                                    }`}
                                             >
                                                 {car.status}
                                             </button>

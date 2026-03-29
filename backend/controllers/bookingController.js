@@ -1,8 +1,7 @@
 // controllers/bookingController.js
-import { getFirestore } from "firebase-admin/firestore";
 import { addDoc, collection } from 'firebase/firestore';
+import { db } from "../firebaseConnect.js";
 
-const db = getFirestore();
 
 // Create a Booking
 export const createBooking = async (userId, car, pickupLocation, restaurantLocation) => {
