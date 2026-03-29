@@ -28,4 +28,3 @@ Thumbs.db
 .firebase/
 # Firebase admin secrets
 backend/firebase-admin-key.json
-*.json
